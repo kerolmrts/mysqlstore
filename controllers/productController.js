@@ -23,8 +23,19 @@ const getProductById= async (productId) =>{
 
 }
 
+const getProductsWithCategories = async() =>{
+    try{
+        const products= productData.getProductsWithCategories()
+        return products;
+    }catch(error){
+        throw new Error ("Erro ao obter os produtos por categoria.Detalhe:" + error.message)
+
+    }
+}
+
 module.exports = {
     getProducts,
-    getProductById
+    getProductById,
+    getProductsWithCategories
 
 }
