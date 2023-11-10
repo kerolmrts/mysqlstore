@@ -12,6 +12,21 @@ router.get("/", (req, res) => {
       res.status(500).send("Erro ao obter produtos!" + error);
     });
 });
+
+
+router.get('/paginated', (req, res) =>{
+  const page= req.query.page;
+  const pageSize= parseInt(req.query.pageSize);
+
+  productController.getProductPaginated(page, pageSize)
+  .then((products) =>{
+    res.json(products)
+  })
+  .catch((error)=>{
+    res.status(500).send('Erro na paginação!' + error)
+  })
+  
+})
 router.get("/withCategories", (req, res) => {
   productController.getProductsWithCategories()
   .then((productsData) =>{

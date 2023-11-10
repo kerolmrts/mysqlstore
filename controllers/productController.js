@@ -23,6 +23,16 @@ const getProductById= async (productId) =>{
 
 }
 
+const getProductPaginated= async (page= 1, pageSize= 20) =>{ // se não tiver valor, vai incluir o 1 e o 20
+try{
+    const startIndex= (page - 1) * pageSize;
+    const products= productData.getProductPaginated(startIndex, pageSize)
+    return products;
+} catch(error){
+    
+}
+
+}
 const getProductsWithCategories = async() =>{
     try{
         const products= productData.getProductsWithCategories()
@@ -36,6 +46,7 @@ const getProductsWithCategories = async() =>{
 module.exports = {
     getProducts,
     getProductById,
-    getProductsWithCategories
+    getProductsWithCategories,
+    getProductPaginated
 
 }

@@ -50,6 +50,21 @@ const getProductById = (productId) => {
   });
 };
 
+const getProductPaginated= (startIndex, pageSize) =>{
+  return new Promise((resolve, reject)=>{
+    const query= 'SELECT * FROM products LIMIT ?, ?';
+    const values= [startIndex, pageSize];
+
+    dbConnection.query(query, values, (err, result) =>{
+      if(err){
+        reject(err)
+      }else{
+        resolve(result)
+      }
+    })
+  })
+}
+
 module.exports = {
   getProducts,
   getProductById,

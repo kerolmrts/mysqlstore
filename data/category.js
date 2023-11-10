@@ -29,7 +29,23 @@ const deleteCategory= (category_id) =>{
     })
 }
 
+const categoriesOrderByName= () =>{
+    return new Promise ((resolve, reject) =>{
+        const query= 'SELECT * FROM categories ORDER BY category_name';
+
+        dbConnection.query(query, (err, result) =>{
+            if(err){
+                reject(err)
+            }else{
+                resolve(result)
+            }
+
+        })
+    })
+}
+
 module.exports = {
     createCategory,
-    deleteCategory
+    deleteCategory,
+    categoriesOrderByName
 }

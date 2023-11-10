@@ -12,7 +12,16 @@ router.post('/', (req, res) => {
             res.status(500).send('Erro ao inserir categoria!' + error)
         })
 })
+ router.get('/categoriesOrderByName', (req, res)=>{
+    categoryController.categoriesOrderByName()
+    .then((result) =>{
+        res.json(result)
 
+    })
+    .catch((error) =>{
+        res.status(500).send('Erro ao obter categorias pelo nome. Detalhes' + error)
+    })
+ })
 router.delete('/:id', (req, res)=>{
     const category_id= req.params.id;
     categoryController.deleteCategory(category_id)

@@ -23,7 +23,17 @@ const deleteCategory= async(category_id) =>{
     }
 }
 
+const categoriesOrderByName= async () =>{
+    try{
+        const result = categoryData.categoriesOrderByName();
+        return result;
+    }catch(error){
+        throw new Error('Erro ao obter categories ordenadas pelo nome. Detalhes' + message.error)
+    }
+}
+
 module.exports = {
     createCategory,
-    deleteCategory
+    deleteCategory,
+    categoriesOrderByName
 }
