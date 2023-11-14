@@ -43,10 +43,38 @@ const getProductsWithCategories = async() =>{
     }
 }
 
+const createProduct = async (
+    product_title, 
+    product_price,
+    product_description,
+    product_image,
+    product_rate,
+    product_count,
+    category_id
+) => {
+    try {
+        product_rate = product_rate || 0;
+        product_count = product_count || 0;
+
+        const result = productData.createProduct(
+            product_title, 
+            product_price,
+            product_description,
+            product_image,
+            product_rate,
+            product_count,
+            category_id
+        );
+        return result;
+    } catch (error) {
+        throw new Error("Erro ao criar o produto. Detalhes: " + error.message)
+    }
+}
+
 module.exports = {
     getProducts,
     getProductById,
     getProductsWithCategories,
-    getProductPaginated
-
+    getProductPaginated,
+    createProduct
 }

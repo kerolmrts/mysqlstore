@@ -17,6 +17,7 @@ CREATE TABLE products (
     product_count INT,
     category_id INT,
     FOREIGN KEY (category_id) REFERENCES categories(category_id)
+    ON DELETE CASCADE;
 );
 
 CREATE TABLE users (

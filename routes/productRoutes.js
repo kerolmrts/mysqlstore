@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const productController = require("../controllers/productController");
+const upload = require("../middlewares/upload")
 
 router.get("/", (req, res) => {
   productController
@@ -51,5 +52,34 @@ router.get("/:id", (req, res) => {
       res.status(500).send("Erro ao obter o produto" + error);
     });
 });
+
+router.post('/', upload.single('product_image'), (req, res) => {
+
+  const product_image = req.file.filename;
+  const {
+      product_title, 
+      product_price,
+      product_description,
+      product_rate,
+      product_count,
+      category_id
+  } = req.body;
+  
+  productController.createProduct(
+      product_title, 
+      product_price,
+      product_description,
+      product_image,
+      product_rate,
+      product_count,
+      category_id
+  )
+  .then((result)=>{
+      res.status(201).json({message: 'Produto criado com sucesso! ',  product_id: result.insertId})
+  })
+  .catch((error) =>{
+      res.status(500).send("Erro ao criar produto! Detalhes: " + error);
+  })
+})
 
 module.exports = router;

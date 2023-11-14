@@ -1,4 +1,5 @@
 const dbConnection = require('./conn');
+const productData= require('./product');
 
 
 const createCategory = (category_name) => {
@@ -23,7 +24,12 @@ const deleteCategory= (category_id) =>{
             if(err){
                 reject(err)
             }else{
+                if(result.affectedRows > 0 ){
+                productData.deleteProductByCategoryId(category_id)
                 resolve(result)
+                }else{
+                    reject(new Error ("Categoria não encontrada"))
+                }
             }
         })
     })
