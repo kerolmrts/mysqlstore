@@ -32,6 +32,8 @@ const categoriesOrderByName= async () =>{
     }
 }
 
+
+
 module.exports = {
     createCategory,
     deleteCategory,
